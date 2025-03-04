@@ -31,7 +31,7 @@
       "KC_O",
       "KC_P",
       "KC_EQL",
-      "KC_LSFT",
+      "KC_RCTL",
       "KC_A",
       "KC_S",
       "KC_D",
@@ -43,7 +43,7 @@
       "KC_L",
       "KC_SCLN",
       "KC_QUOT",
-      "KC_RCTL",
+      "KC_LSFT",
       "KC_Z",
       "KC_X",
       "KC_C",
@@ -60,8 +60,8 @@
       "MO(1)",
       "KC_NUBS",
       "KC_LGUI",
-      "KC_ENT",
       "KC_SPC",
+      "KC_ENT",
       "KC_BSPC",
       "KC_LALT",
       "MO(2)"
@@ -249,4 +249,3 @@
   ],
   "author": ""
 }
-
