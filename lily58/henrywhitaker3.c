@@ -1,5 +1,4 @@
 #include QMK_KEYBOARD_H
- bongo
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
 #ifdef OLED_DRIVER_ENABLE
