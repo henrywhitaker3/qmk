@@ -36,6 +36,8 @@ jobs:
           mkdir -p users/${{ github.actor }}
           mv tmp/${{ matrix.file }}/* users/${{ github.actor }}/
           rm -rf tmp
+          mv users/${{ github.actor }}/config.h users/${{ github.actor }}/${{ github.actor }}.h
+          mv users/${{ github.actor }}/source.c users/${{ github.actor }}/${{ github.actor }}.c
 
       - name: Build firmware
         run: qmk compile "users/${{ github.actor }}/${{ github.actor }}.json"
