@@ -1,5 +1,7 @@
 #include QMK_KEYBOARD_H
 
+bongo
+
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
 #ifdef OLED_DRIVER_ENABLE
 
@@ -42,8 +44,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
 #ifdef OLED_DRIVER_ENABLE
     set_keylog(keycode, record);
+    set_timelog();
 #endif
-    // set_timelog();
   }
   return true;
 }
