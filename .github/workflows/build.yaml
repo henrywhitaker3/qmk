@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         file:
-          - lily58.json
+          - lily58
 
     steps:
       - name: Disable git safe directory checks
@@ -29,7 +29,13 @@ jobs:
       - name: Checkout userspace
         uses: actions/checkout@v4
         with:
-          path: users/${{ github.actor }}
+          path: tmp/
+
+      - name: Move file for config
+        run: |
+          mkdir -p users/${{ github.actor }}
+          mv tmp/${{ matrix.file }}/* users/${{ github.actor }}/
+          rm -rf tmp
 
       - name: Build firmware
         run: qmk compile "users/${{ github.actor }}/${{ matrix.file }}"
