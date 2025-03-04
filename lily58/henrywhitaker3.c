@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
-//SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
-#ifdef OLED_DRIVER_ENABLE
+//SSD1306 OLED update loop, make sure to enable OLED_ENABLE=yes in rules.mk
+#ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master())
@@ -16,43 +16,33 @@ void set_keylog(uint16_t keycode, keyrecord_t *record);
 const char *read_keylog(void);
 const char *read_keylogs(void);
 
-const char *read_mode_icon(bool swap);
-const char *read_host_led_state(void);
-void set_timelog(void);
-const char *read_timelog(void);
+// const char *read_mode_icon(bool swap);
+// const char *read_host_led_state(void);
+// void set_timelog(void);
+// const char *read_timelog(void);
 
-// OLED Render
-void oled_task_user(void) {
-  if (is_keyboard_left()) {
+bool oled_task_user(void) {
+  if (is_keyboard_master()) {
     // If you want to change the display of OLED, you need to change here
     oled_write_ln(read_layer_state(), false);
     oled_write_ln(read_keylog(), false);
     oled_write_ln(read_keylogs(), false);
-
-    led_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
-    led_write_ln(read_host_led_state(), false);
-    led_write_ln(read_timelog(), false);
+    //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
+    //oled_write_ln(read_host_led_state(), false);
+    //oled_write_ln(read_timelog(), false);
   } else {
     oled_write(read_logo(), false);
   }
+    return false;
 }
-#endif // OLED_DRIVER_ENABLE
+#endif // OLED_ENABLE
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
     set_keylog(keycode, record);
-    set_timelog();
 #endif
+    // set_timelog();
   }
   return true;
 }
-
-// RBG Render
-#ifdef RGBLIGHT_ENABLE
-void keyboard_post_init_user(void) {
-  rgblight_enable_noeeprom(); // Enables RGB, without saving settings
-  rgblight_sethsv_noeeprom(HSV_WHITE);
-  rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-}
-#endif
