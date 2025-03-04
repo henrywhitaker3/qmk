@@ -38,7 +38,7 @@ jobs:
           rm -rf tmp
 
       - name: Build firmware
-        run: qmk compile "users/${{ github.actor }}/${{ github.actor }}.json"
+        run: qmk compile -e CONVERT_TO=rp2040_ce "users/${{ github.actor }}/${{ github.actor }}.json"
 
       - name: Archive firmware
         uses: actions/upload-artifact@v4
